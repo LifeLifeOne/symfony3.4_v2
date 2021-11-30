@@ -4,10 +4,12 @@
 
     <div class="container mt-5">
         <h3 class="text-info">Liste des produits</h3>
+        <span><a class="btn btn-info" href="/articles/add">Ajouter un article</a></span>
         <hr>
         {% for message in app.flashes('info') %}
-            <div class="alert alert-success w-25 text-center" role="alert">
-                {{ message }}
+            <div class="alert alert-success alert-dismissible fade show text-center w-25" role="alert" style="position: absolute; top:100px;left: 50%;transform: translateX(-50%)">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         {% endfor %}
         <table class="table table-striped shadow-sm rounded bg-white">

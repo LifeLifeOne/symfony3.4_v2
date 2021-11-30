@@ -1,0 +1,41 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        {{ form_start(form) }}
+            {{ form_widget(form.name, {'attr': {'placeholder': 'Rechercher un article', 'class':'form-control mb-2'}}) }}
+            {{ form_widget(form.submit, {'label':'GO', 'attr':{'class':'btn btn-info'}}) }}
+        {{ form_end(form, {'render_rest':false}) }}
+
+
+        <table class="table table-striped shadow-sm rounded bg-white mt-4">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th class="text-end">Quantité</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in find %}
+                <tr>
+                    <th>{{ article.name }}</th>
+                    <th class="text-end">{{ article.quantity }}</th>
+
+                    {# Details #}
+                    <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
+                                            class="btn btn-secondary">Details</a>
+
+                        {# Modifier #}
+                        <a href="" class="btn btn-warning">Modifier</a>
+
+                        {# Supprimer #}
+                        <a href="{{ path('article_delete', {id: article.id}) }}"
+                           class="btn btn-danger"
+                           onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

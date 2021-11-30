@@ -3,8 +3,15 @@
 {% block body %}
 
     <div class="container mt-5">
-        <form method="POST" class="w-25">
+        <form method="POST">
             <h3>Articles</h3>
+
+            {% for message in app.flashes('info') %}
+                <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="position: absolute; min-width: max-content; top:75px;left: 50%;transform: translateX(-50%)">
+                    <strong>{{ message }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
 
             <select class="form-select mb-4" name="select_list" size="3">
                 {% for article in articles %}

@@ -43,7 +43,8 @@ class ArticlesController extends Controller
         }
 
         return $this->render('@App/Articles/add.html.twig', [
-            "frm" => $form->createView(),
+            'form' => $form->createView(),
+            'dynamic' => 'Ajouter'
         ]);
     }
 
@@ -83,7 +84,44 @@ class ArticlesController extends Controller
         $conn->remove($article);
         $conn->flush();
 
+        $this->addFlash(
+            'info',
+            'Article supprimé avec succès !'
+        );
+
         return $this->redirectToRoute('articles_list');
+    }
+
+    /**
+     * @Route("/update/{id}", name="article_update")
+     */
+    public function modifierAction(Request $request, $id)
+    {
+
+        $conn = $this->getDoctrine()->getManager();
+        $article = $conn->getRepository(Articles::class)->find($id);
+
+        // On cree le formulaire
+        $form = $this->createForm(ArticlesType::class,$article);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+
+            $conn->persist($article);
+            $conn->flush();
+
+            $this->addFlash(
+                'info',
+                'Article modifié avec succès !'
+            );
+
+            return $this->redirectToRoute('articles_list');
+        }
+
+        return $this->render('@App/Articles/add.html.twig', array(
+            'form'  => $form->createView(),
+            'dynamic' => 'Modifier'
+        ));
     }
 
     /**
@@ -97,20 +135,23 @@ class ArticlesController extends Controller
 
         if ($request->isMethod('POST')) {
 
+            $id = $request->get('select_list');
+            $article = $conn->getRepository(Articles::class)->find($id);
+
             if ($request->get('btn') == "delete") {
 
-                $id = $_POST['select_list'];
-                $article = $conn->getRepository(Articles::class)->find($id);
                 $conn->remove($article);
                 $conn->flush();
+
+                $this->addFlash(
+                    'info',
+                    'Suppression confirmée !'
+                );
 
                 return $this->redirectToRoute('exercice_select');
             }
 
             if ($request->get('btn') == "details") {
-
-                $id = $_POST['select_list'];
-                $article = $conn->getRepository(Articles::class)->find($id);
 
                 return $this->render('@App/Articles/display_one.html.twig', [
                     "article" => $article
@@ -121,6 +162,28 @@ class ArticlesController extends Controller
 
         return $this->render('@App/Articles/exercice.html.twig', [
             "articles" => $articles
+        ]);
+    }
+
+    /**
+     * @route("/search", name="search")
+     */
+    public function searchAction(Request $request)
+    {
+        $search = $this->createForm(ArticlesType::class);
+        $search->handleRequest($request);
+
+        if ($search->isSubmitted()) {
+
+            $res = $request->get('appbundle_articles');
+            $name = $res['name'];
+            $conn = $this->getDoctrine()->getManager();
+            $find = $conn->getRepository(Articles::class)->findBy(['name' => $name]);
+        }
+
+        return $this->render('@App/Articles/search.html.twig', [
+            "form" => $search->createView(),
+            "find" => @$find
         ]);
     }
 

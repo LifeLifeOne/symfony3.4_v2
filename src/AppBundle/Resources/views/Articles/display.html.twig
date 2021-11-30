@@ -8,7 +8,7 @@
         <hr>
         {% for message in app.flashes('info') %}
             <div class="alert alert-success alert-dismissible fade show text-center w-25" role="alert" style="position: absolute; top:100px;left: 50%;transform: translateX(-50%)">
-                <strong>{{ message }}</strong>
+                {{ message }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         {% endfor %}
@@ -31,7 +31,7 @@
                                             class="btn btn-secondary">Details</a>
 
                     {# Modifier #}
-                    <a href="" class="btn btn-warning">Modifier</a>
+                    <a href="{{ path('article_update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
 
                     {# Supprimer #}
                     <a href="{{ path('article_delete', {id: article.id}) }}"

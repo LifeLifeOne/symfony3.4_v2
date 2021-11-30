@@ -30,13 +30,13 @@
                     <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
                                             class="btn btn-secondary">Details</a>
 
-                        {# Modifier #}
-                        <a href="" class="btn btn-warning">Modifier</a>
+                    {# Modifier #}
+                    <a href="{{ path('article_update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
 
-                        {# Supprimer #}
-                        <a href="{{ path('article_delete', {id: article.id}) }}"
-                           class="btn btn-danger"
-                           onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
+                    {# Supprimer #}
+                    <a href="{{ path('article_delete', {id: article.id}) }}"
+                       class="btn btn-danger"
+                       onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
                 </tr>
             {% endfor %}
             </tbody>

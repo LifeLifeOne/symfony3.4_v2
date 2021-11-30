@@ -5,7 +5,8 @@
 
     <div class="container mt-5">
         <h3 class="text-info">Liste des produits</h3>
-        <span><a class="btn btn-info" href="/articles/add">Ajouter un article</a></span>
+        <a class="btn btn-info" href="/articles/add">Ajouter un article</a>
+        <a class="btn btn-secondary" href="/articles/search">Rechercher</a>
         <hr>
         {% for message in app.flashes('info') %}
             <div class="alert alert-success alert-dismissible fade show text-center" role="alert">

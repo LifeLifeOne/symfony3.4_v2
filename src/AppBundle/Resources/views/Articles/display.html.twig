@@ -18,8 +18,6 @@
                 <th>Produit</th>
                 <th class="text-end">Quantité</th>
                 <th></th>
-                <th></th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -30,13 +28,13 @@
 
                     {# Details #}
                     <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
-                                            class="btn btn-secondary">Details</a></th>
+                                            class="btn btn-secondary">Details</a>
 
                     {# Modifier #}
-                    <th class="text-end"><a href="" class="btn btn-warning">Modifier</a></th>
+                    <a href="" class="btn btn-warning">Modifier</a>
 
                     {# Supprimer #}
-                    <th class="text-end"><a href="{{ path('article_delete', {id: article.id}) }}"
+                    <a href="{{ path('article_delete', {id: article.id}) }}"
                                             class="btn btn-danger"
                                             onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
                 </tr>

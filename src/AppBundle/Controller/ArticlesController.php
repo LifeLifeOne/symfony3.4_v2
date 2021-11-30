@@ -86,4 +86,42 @@ class ArticlesController extends Controller
         return $this->redirectToRoute('articles_list');
     }
 
+    /**
+     * @Route("/exercice", name="exercice_select")
+     * @return Response|null
+     */
+    public function exerciceAction(Request $request)
+    {
+        $conn = $this->getDoctrine()->getManager();
+        $articles = $conn->getRepository(Articles::class)->findAll();
+
+        if ($request->isMethod('POST')) {
+
+            if ($request->get('btn') == "delete") {
+
+                $id = $_POST['select_list'];
+                $article = $conn->getRepository(Articles::class)->find($id);
+                $conn->remove($article);
+                $conn->flush();
+
+                return $this->redirectToRoute('exercice_select');
+            }
+
+            if ($request->get('btn') == "details") {
+
+                $id = $_POST['select_list'];
+                $article = $conn->getRepository(Articles::class)->find($id);
+
+                return $this->render('@App/Articles/display_one.html.twig', [
+                    "article" => $article
+                ]);
+            }
+
+        }
+
+        return $this->render('@App/Articles/exercice.html.twig', [
+            "articles" => $articles
+        ]);
+    }
+
 }

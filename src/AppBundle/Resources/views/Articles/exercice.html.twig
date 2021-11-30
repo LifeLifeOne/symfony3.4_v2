@@ -1,0 +1,20 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <form method="POST" class="w-25">
+            <h3>Articles</h3>
+
+            <select class="form-select mb-4" name="select_list" size="3">
+                {% for article in articles %}
+                <option value="{{ article.id }}">{{ article.name }}</option>
+                {% endfor %}
+            </select>
+
+            <button name="btn" value="details" type="submit" class="btn btn-secondary me-2">Détails</button>
+            <button name="btn" value="delete" type="submit" class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+
+{% endblock %}

@@ -4,8 +4,10 @@
 {% block body %}
     <div class="container mt-5">
         {{ form_start(form) }}
-            {{ form_widget(form.name, {'attr': {'placeholder': 'Rechercher un article', 'class':'form-control mb-2'}}) }}
-            {{ form_widget(form.submit, {'label':'GO', 'attr':{'class':'btn btn-info'}}) }}
+            <div class="input-group w-100">
+                {{ form_widget(form.submit, {'label':'Rechercher', 'attr':{'class':'btn btn-secondary'}}) }}
+                {{ form_widget(form.name, {'attr': {'placeholder': 'Rechercher un article', 'class':'form-control'}}) }}
+            </div>
         {{ form_end(form, {'render_rest':false}) }}
 
 

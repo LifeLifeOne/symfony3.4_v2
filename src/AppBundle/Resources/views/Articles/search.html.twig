@@ -6,7 +6,7 @@
         <a class="mb-3 d-block link-danger" href="/articles/display"><i class="fas fa-long-arrow-alt-left me-2"></i> Retour page précédente</a>
         {{ form_start(form) }}
             <div class="input-group w-100">
-                {{ form_widget(form.submit, {'label':'Rechercher', 'attr':{'class':'btn btn-secondary'}}) }}
+                {{ form_widget(form.submit, {'label':'Rechercher', 'attr':{'class':'btn btn-success'}}) }}
                 {{ form_widget(form.name, {'attr': {'placeholder': 'Rechercher un article', 'class':'form-control'}}) }}
             </div>
         {{ form_end(form, {'render_rest':false}) }}

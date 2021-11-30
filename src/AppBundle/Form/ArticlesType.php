@@ -28,7 +28,8 @@ class ArticlesType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description:',
-                'attr' => ['class' => 'form-control mb-2']
+                'attr' => ['class' => 'form-control mb-2',
+                            'style' => 'height: 180px']
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-info']

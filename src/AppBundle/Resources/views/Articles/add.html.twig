@@ -1,0 +1,12 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        {{ form_start(frm) }}
+        {{ form_widget(frm) }}
+        <button type="submit" class="btn btn-info">Envoyer</button>
+        {{ form_end(frm) }}
+    </div>
+{% endblock %}
+
+

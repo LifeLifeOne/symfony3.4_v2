@@ -1,0 +1,46 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h3 class="text-info">Liste des produits</h3>
+        <hr>
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-success w-25 text-center" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <table class="table table-striped shadow-sm rounded bg-white">
+            <thead>
+            <tr>
+                <th>Produit</th>
+                <th class="text-end">Quantité</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <th>{{ article.name }}</th>
+                    <th class="text-end">{{ article.quantity }}</th>
+
+                    {# Details #}
+                    <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
+                                            class="btn btn-secondary">Details</a></th>
+
+                    {# Modifier #}
+                    <th class="text-end"><a href="" class="btn btn-warning">Modifier</a></th>
+
+                    {# Supprimer #}
+                    <th class="text-end"><a href="{{ path('article_delete', {id: article.id}) }}"
+                                            class="btn btn-danger"
+                                            onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

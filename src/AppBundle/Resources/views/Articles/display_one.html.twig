@@ -1,0 +1,17 @@
+{% extends '@App/base.html.twig' %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <div class="d-flex gap-3">
+            <img class="card-img-top" style="width: 200px" src="http://via.placeholder.com/250/80" alt="Card image">
+            <div>
+                <h4 class="text-danger fs-1">{{ article.name }}</h4>
+                <small><em>Quantité: <b>{{ article.quantity }}</b></em></small>
+                <p class="mt-3 opacity-75">{{ article.description }}</p>
+                <a href="{{ path('articles_list') }}" class="btn btn-primary">Retour aux articles</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

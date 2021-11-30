@@ -30,7 +30,7 @@ class DefaultController extends Controller
             $password = $request->get('password');
 
             if ($email == 'admin2021@gmail.com' && $password == 'admin123') {
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('articles_list');
             } else {
                 $err = "Identifiants incorrect !";
             }

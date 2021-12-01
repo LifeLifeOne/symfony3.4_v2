@@ -15,30 +15,35 @@
     {% endfor %}
     <table class="table table-striped shadow-sm rounded bg-white">
         <thead>
-        <tr>
-            <th>Produit</th>
-            <th class="text-end">Quantité</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th>Produit</th>
+                <th>Quantité</th>
+                <th class="text-end">Action</th>
+            </tr>
         </thead>
         <tbody>
-        {% for article in articles %}
-            <tr>
-                <th>{{ article.name|upper }}</th>
-                <th class="text-end">{{ article.quantity }}</th>
+            {% for article in articles %}
+                <tr>
+                    <th>{{ article.name|upper }}</th>
+                    <th>{{ article.quantity }}</th>
+                    <th class="text-end">
+                    {# Details #}
+                    <a href="{{ path('article_details', {id: article.id}) }}" class="btn btn-secondary">Details</a>
 
-                {# Details #}
-                <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
-                                        class="btn btn-secondary">Details</a>
+                    {% if app.session.get('user').role == 1 %}
+                    {# Modifier #}
+                    <a href="{{ path('article_update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
 
-                {# Modifier #}
-                <a href="{{ path('article_update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
+                    {# Supprimer #}
+                   <a href="{{ path('article_delete', {id: article.id}) }}" class="btn btn-danger" onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a>
 
-                {# Supprimer #}
-                <a href="{{ path('article_delete', {id: article.id}) }}"
-                                        class="btn btn-danger"
-                                        onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
-            </tr>
+                    {% elseif app.session.get('user').role == 2 %}
+
+                    {# Commander #}
+                        <a href="" class="btn btn-success">Commander</a>
+                    {% endif %}
+                    </th>
+                </tr>
         {% endfor %}
         </tbody>
     </table>

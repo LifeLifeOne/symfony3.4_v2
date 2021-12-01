@@ -30,16 +30,24 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/articles/display">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/articles/search">Rechercher</a>
+                    </li>
+                </ul>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
                         <a class="nav-link" href="/users/auth">Connexion</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/users/register">S'enregistrer</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/articles/display">Articles</a>
+                    <li>
+                        <a class="btn btn-danger" href="{{ path('user_logout') }}" title="Deconnexion"><i class="fas fa-sign-out-alt"></i></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/articles/search">Rechercher</a>
+                    <li class="ms-3">
+                        <span class="badge rounded-pill bg-info p-2 mt-1">Vivien BARBEAU</span>
                     </li>
                 </ul>
             </div>

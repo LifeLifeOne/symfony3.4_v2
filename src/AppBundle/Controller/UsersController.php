@@ -7,6 +7,7 @@ use AppBundle\Form\UsersType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -58,18 +59,20 @@ class UsersController extends Controller
             $password = $form_DOM['password'];
 
             $conn = $this->getDoctrine()->getManager();
-            $res = $conn->getRepository(Users::class)->findBy(['email' => $email, 'password' => $password]);
+            $res = $conn->getRepository(Users::class)->findOneBy(['email' => $email, 'password' => $password]);
 
             if (!empty($res)) {
 
-//                foreach ($res as $key) {
-//                    $role = $key->getRole();
-//                }
+                $session = new Session();
+                $session->set('user', $res);
+//                $role = $res->getRole();
 
-                $this->addFlash(
-                    'info',
-                    'Félicitations, vous êtes connecté !'
-                );
+//                $this->addFlash(
+//                    'info',
+//                    'Félicitations, vous êtes connecté !'
+//                );
+
+                return $this->redirectToRoute('articles_list');
 
             } else {
 
@@ -87,6 +90,17 @@ class UsersController extends Controller
             'form' => $form->createView(),
             'dynamic' => 'Se connecter'
         ]);
+    }
+
+    /**
+     * @Route("/logout", name="user_logout")
+     */
+    public function logoutAction()
+    {
+        $session = new Session();
+        $session->clear();
+
+        return $this->redirectToRoute('user_auth');
     }
 
 }

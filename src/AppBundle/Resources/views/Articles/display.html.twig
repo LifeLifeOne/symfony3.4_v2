@@ -3,46 +3,45 @@
 
 {% block body %}
 
-    <div class="container mt-5">
-        <h3 class="text-info">Liste des produits</h3>
-        <a class="btn btn-info" href="/articles/add"><i class="fas fa-plus me-2"></i>Ajouter un article</a>
-        <a class="btn btn-success" href="/articles/search"><i class="fas fa-search me-2"></i>Rechercher</a>
-        <hr>
-        {% for message in app.flashes('info') %}
-            <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-        <table class="table table-striped shadow-sm rounded bg-white">
-            <thead>
+    <h3 class="text-info">Liste des produits</h3>
+    <a class="btn btn-info" href="/articles/add"><i class="fas fa-plus me-2"></i>Ajouter un article</a>
+    <a class="btn btn-success" href="/articles/search"><i class="fas fa-search me-2"></i>Rechercher</a>
+    <hr>
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+    <table class="table table-striped shadow-sm rounded bg-white">
+        <thead>
+        <tr>
+            <th>Produit</th>
+            <th class="text-end">Quantité</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in articles %}
             <tr>
-                <th>Produit</th>
-                <th class="text-end">Quantité</th>
-                <th></th>
+                <th>{{ article.name|upper }}</th>
+                <th class="text-end">{{ article.quantity }}</th>
+
+                {# Details #}
+                <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
+                                        class="btn btn-secondary">Details</a>
+
+                {# Modifier #}
+                <a href="{{ path('article_update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
+
+                {# Supprimer #}
+                <a href="{{ path('article_delete', {id: article.id}) }}"
+                                        class="btn btn-danger"
+                                        onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
             </tr>
-            </thead>
-            <tbody>
-            {% for article in articles %}
-                <tr>
-                    <th>{{ article.name }}</th>
-                    <th class="text-end">{{ article.quantity }}</th>
+        {% endfor %}
+        </tbody>
+    </table>
 
-                    {# Details #}
-                    <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
-                                            class="btn btn-secondary">Details</a>
-
-                    {# Modifier #}
-                    <a href="{{ path('article_update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
-
-                    {# Supprimer #}
-                    <a href="{{ path('article_delete', {id: article.id}) }}"
-                                            class="btn btn-danger"
-                                            onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
 
 {% endblock %}

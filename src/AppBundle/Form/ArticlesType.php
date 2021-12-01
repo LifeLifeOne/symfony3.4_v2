@@ -20,16 +20,18 @@ class ArticlesType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Article:',
-                'attr' => ['class' => 'form-control mb-2']
+                'attr' => ['class' => 'form-control my-2',
+                    'style' => 'width: 20rem']
             ])
             ->add('quantity', IntegerType::class, [
                 'label' => 'Quantité:',
-                'attr' => ['class' => 'form-control mb-2']
+                'attr' => ['class' => 'form-control my-2',
+                    'style' => 'width: 6rem']
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description:',
-                'attr' => ['class' => 'form-control mb-2',
-                            'style' => 'height: 180px']
+                'attr' => ['class' => 'form-control my-2',
+                            'style' => 'height: 8rem; width: 35rem']
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-info']

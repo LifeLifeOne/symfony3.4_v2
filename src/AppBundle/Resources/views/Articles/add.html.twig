@@ -2,28 +2,27 @@
 {% block title %}{{ dynamic }} un article{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
 
-        <h3>{{ dynamic }} un article</h3>
+    <h3>{{ dynamic }} un article</h3>
 
-        <div class="form-group mt-4">
-            {{ form_start(form) }}
+    <div class="form-group mt-4">
+        {{ form_start(form) }}
 
-                {# NAME #}
-                {{ form_label(form.name) }}
-                {{ form_widget(form.name) }}
+            {# NAME #}
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
 
-                {# QUANTITY #}
-                {{ form_label(form.quantity) }}
-                {{ form_widget(form.quantity) }}
+            {# QUANTITY #}
+            {{ form_label(form.quantity) }}
+            {{ form_widget(form.quantity) }}
 
-                {# DESCRIPTION #}
-                {{ form_label(form.description) }}
-                {{ form_widget(form.description) }}
-                {{ form_row(form.submit, {'label':dynamic}) }}
-            {{ form_end(form) }}
-        </div>
+            {# DESCRIPTION #}
+            {{ form_label(form.description) }}
+            {{ form_widget(form.description) }}
+            {{ form_row(form.submit, {'label':dynamic}) }}
+        {{ form_end(form) }}
     </div>
+
 {% endblock %}
 
 

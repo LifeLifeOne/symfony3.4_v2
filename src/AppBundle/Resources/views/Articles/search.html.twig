@@ -2,44 +2,44 @@
 {% block title %}Rechercher des articles{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <a class="mb-3 d-block link-danger" href="/articles/display"><i class="fas fa-long-arrow-alt-left me-2"></i> Retour page précédente</a>
-        {{ form_start(form) }}
-            <div class="input-group w-100">
-                {{ form_widget(form.submit, {'label':'Rechercher', 'attr':{'class':'btn btn-success'}}) }}
-                {{ form_widget(form.name, {'attr': {'placeholder': 'Rechercher un article', 'class':'form-control'}}) }}
-            </div>
-        {{ form_end(form, {'render_rest':false}) }}
+
+    <a class="mb-3 d-block link-danger" href="/articles/display"><i class="fas fa-long-arrow-alt-left me-2"></i> Retour page précédente</a>
+    {{ form_start(form) }}
+        <div class="input-group w-100">
+            {{ form_widget(form.submit, {'label':'Rechercher', 'attr':{'class':'btn btn-success'}}) }}
+            {{ form_widget(form.name, {'attr': {'placeholder': 'Rechercher un article', 'class':'form-control'}}) }}
+        </div>
+    {{ form_end(form, {'render_rest':false}) }}
 
 
-        <table class="table table-striped shadow-sm rounded bg-white mt-4">
-            <thead>
+    <table class="table table-striped shadow-sm rounded bg-white mt-4">
+        <thead>
+        <tr>
+            <th>Produit</th>
+            <th class="text-end">Quantité</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for article in find %}
             <tr>
-                <th>Produit</th>
-                <th class="text-end">Quantité</th>
-                <th></th>
+                <th>{{ article.name }}</th>
+                <th class="text-end">{{ article.quantity }}</th>
+
+                {# Details #}
+                <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
+                                        class="btn btn-secondary">Details</a>
+
+                {# Modifier #}
+                <a href="{{ path('article_update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
+
+                {# Supprimer #}
+                <a href="{{ path('article_delete', {id: article.id}) }}"
+                   class="btn btn-danger"
+                   onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
             </tr>
-            </thead>
-            <tbody>
-            {% for article in find %}
-                <tr>
-                    <th>{{ article.name }}</th>
-                    <th class="text-end">{{ article.quantity }}</th>
+        {% endfor %}
+        </tbody>
+    </table>
 
-                    {# Details #}
-                    <th class="text-end"><a href="{{ path('article_details', {id: article.id}) }}"
-                                            class="btn btn-secondary">Details</a>
-
-                    {# Modifier #}
-                    <a href="{{ path('article_update', {id: article.id}) }}" class="btn btn-warning">Modifier</a>
-
-                    {# Supprimer #}
-                    <a href="{{ path('article_delete', {id: article.id}) }}"
-                       class="btn btn-danger"
-                       onclick="if(!confirm('Confirmer la suppression ?')) { return false }">Supprimer</a></th>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
 {% endblock %}

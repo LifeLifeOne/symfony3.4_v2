@@ -2,26 +2,24 @@
 
 {% block body %}
 
-    <div class="container mt-5">
-        <form method="POST">
-            <h3>Articles</h3>
+    <form method="POST">
+        <h3>Articles</h3>
 
-            {% for message in app.flashes('info') %}
-                <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="position: absolute; min-width: max-content; top:75px;left: 50%;transform: translateX(-50%)">
-                    <strong>{{ message }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+        {% for message in app.flashes('info') %}
+            <div class="alert alert-success alert-dismissible fade show text-center" role="alert" style="position: absolute; min-width: max-content; top:75px;left: 50%;transform: translateX(-50%)">
+                <strong>{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+
+        <select class="form-select mb-4" name="select_list" size="3">
+            {% for article in articles %}
+            <option value="{{ article.id }}">{{ article.name }}</option>
             {% endfor %}
+        </select>
 
-            <select class="form-select mb-4" name="select_list" size="3">
-                {% for article in articles %}
-                <option value="{{ article.id }}">{{ article.name }}</option>
-                {% endfor %}
-            </select>
-
-            <button name="btn" value="details" type="submit" class="btn btn-secondary me-2">Détails</button>
-            <button name="btn" value="delete" type="submit" class="btn btn-danger">Supprimer</button>
-        </form>
-    </div>
+        <button name="btn" value="details" type="submit" class="btn btn-secondary me-2">Détails</button>
+        <button name="btn" value="delete" type="submit" class="btn btn-danger">Supprimer</button>
+    </form>
 
 {% endblock %}

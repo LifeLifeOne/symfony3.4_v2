@@ -1,0 +1,39 @@
+{% extends '@App/base.html.twig' %}
+{% block title %}{{ dynamic }}{% endblock %}
+
+{% block body %}
+
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <h3>{{ dynamic }}</h3>
+    <div class="form-group mt-4">
+        {{ form_start(form) }}
+
+        {# EMAIL #}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+
+        {# PASSWORD #}
+        {{ form_label(form.password) }}
+        {{ form_widget(form.password) }}
+
+        {# BUTTON #}
+        {{ form_row(form.submit, {'label':dynamic}) }}
+
+        {{ form_end(form, {'render_rest':false}) }}
+    </div>
+{% endblock %}
+
+

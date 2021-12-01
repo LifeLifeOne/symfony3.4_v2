@@ -35,7 +35,8 @@ class ArticlesType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-info']
-            ]);
+            ])
+        ;
     }
     /**
      * {@inheritdoc}

@@ -175,8 +175,8 @@ class ArticlesController extends Controller
 
         if ($search->isSubmitted()) {
 
-            $res = $request->get('appbundle_articles');
-            $name = $res['name'];
+            $form = $request->get('appbundle_articles');
+            $name = $form['name'];
             $conn = $this->getDoctrine()->getManager();
             $find = $conn->getRepository(Articles::class)->findBy(['name' => $name]);
         }

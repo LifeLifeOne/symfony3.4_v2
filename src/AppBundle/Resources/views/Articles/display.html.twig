@@ -3,6 +3,10 @@
 
 {% block body %}
 
+    <div>
+        <span class="badge rounded-pill bg-info p-2 mt-1">{{ app.session.get('user').firstName ~' '~  app.session.get('user').lastName }}</span>
+    </div>
+
     <h3 class="text-info">Liste des produits</h3>
     <a class="btn btn-info" href="/articles/add"><i class="fas fa-plus me-2"></i>Ajouter un article</a>
     <a class="btn btn-success" href="/articles/search"><i class="fas fa-search me-2"></i>Rechercher</a>

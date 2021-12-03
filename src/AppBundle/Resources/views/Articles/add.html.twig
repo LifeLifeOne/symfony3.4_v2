@@ -8,18 +8,33 @@
     <div class="form-group mt-4">
         {{ form_start(form) }}
 
-            {# NAME #}
-            {{ form_label(form.name) }}
-            {{ form_widget(form.name) }}
+        <div class="d-flex">
+            <div>
+                {# NAME #}
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+            </div>
+            <div>
+                {# PRICE #}
+                {{ form_label(form.price) }}
+                {{ form_widget(form.price) }}
+            </div>
+            <div>
+                {# QUANTITY #}
+                {{ form_label(form.quantity) }}
+                {{ form_widget(form.quantity, {'attr':{'min':'1', 'value':1}}) }}
+            </div>
+        </div>
 
-            {# QUANTITY #}
-            {{ form_label(form.quantity) }}
-            {{ form_widget(form.quantity) }}
+        {# DESCRIPTION #}
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
 
-            {# DESCRIPTION #}
-            {{ form_label(form.description) }}
-            {{ form_widget(form.description) }}
-            {{ form_row(form.submit, {'label':dynamic}) }}
+        {# DESCRIPTION #}
+        {{ form_widget(form.photo) }}
+
+        {{ form_row(form.submit, {'label':dynamic}) }}
+
         {{ form_end(form) }}
     </div>
 

@@ -4,10 +4,11 @@
 {% block body %}
 
     <div class="d-flex gap-3">
-        <img class="card-img-top" style="width: 200px" src="http://via.placeholder.com/250/80" alt="Card image">
+        <img class="card-img-top" style="width: 200px" src="{{ asset('/photo_article/' ~ article.photo) }}" alt="{{ article.name }}">
         <div>
             <h4 class="text-danger fs-1">{{ article.name|upper }}</h4>
-            <small><em>Quantité: <b>{{ article.quantity }}</b></em></small>
+            <small><em>Quantité: <b>{{ article.quantity }}</b></em></small><br>
+            <small><em>Prix: <b>{{ article.price }} €</b></em></small>
             <p class="mt-3 opacity-75">{{ article.description|nl2br }}</p>
             <a href="{{ path('articles_list') }}" class="btn btn-primary">Retour aux articles</a>
         </div>

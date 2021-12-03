@@ -46,6 +46,10 @@
             </div>
         </div>
 
+        {# FILE #}
+        {{ form_label(form.photo) }}
+        {{ form_widget(form.photo) }}
+
         {# BUTTON #}
         {{ form_row(form.submit, {'label':dynamic}) }}
         {{ form_end(form) }}

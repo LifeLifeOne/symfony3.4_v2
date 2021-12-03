@@ -22,6 +22,7 @@
             <tr>
                 <th>Produit</th>
                 <th>Quantité</th>
+                <th>Prix(Euro)</th>
                 <th class="text-end">Action</th>
             </tr>
         </thead>
@@ -30,6 +31,7 @@
                 <tr>
                     <th>{{ article.name|upper }}</th>
                     <th>{{ article.quantity }}</th>
+                    <th>{{ article.price }}</th>
                     <th class="text-end">
                     {# Details #}
                     <a href="{{ path('article_details', {id: article.id}) }}" class="btn btn-secondary">Details</a>

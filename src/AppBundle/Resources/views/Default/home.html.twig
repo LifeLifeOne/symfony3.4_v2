@@ -1,5 +1,100 @@
 {% extends '@App/base.html.twig' %}
 
 {% block body %}
-    <h1>HOME PAGE</h1>
+    <h1>Nos produits:</h1>
+
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Se connecter</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group mt-4">
+
+                        #######
+                        FORM
+                        #######
+{#                        {{ form_start(form, {'action':path('user_auth')}) }}#}
+
+{#                        #}{# EMAIL #}
+{#                        {{ form_label(form.email) }}#}
+{#                        {{ form_widget(form.email) }}#}
+
+{#                        #}{# PASSWORD #}
+{#                        {{ form_label(form.password) }}#}
+{#                        {{ form_widget(form.password) }}#}
+
+{#                        #}{# BUTTON #}
+{#                        {{ form_row(form.submit, {'label':dynamic}) }}#}
+
+{#                        {{ form_end(form, {'render_rest':false}) }}#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="d-flex flex-wrap gap-3">
+        {% for article in articles %}
+
+            <!-- Modal -->
+            <div class="modal fade" id="cart_modal_{{ article.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ajouter {{ article.name }} au panier ?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="POST">
+                                <input type="hidden" name="id_article_hidden" value="{{ article.id }}">
+
+                                <label for="quantity" class="form-label">Quantité souhaitée:</label>
+                                <input type="number" name="quantity" min="1" value="1" class="form-control">
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <button type="submit" class="btn btn-primary">Ajouter</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        <div class="card" style="width: 22rem;">
+            <img src="{{ asset('photo_article/' ~ article.photo) }}" class="card-img-top" height=250 alt="{{ article.name }}">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <h5 class="card-title">{{ article.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ article.price }} €</h6>
+                    <p class="card-text opacity-75">{{ article.description[:80]}} [...]</p>
+                </div>
+                <div class="d-flex justify-content-between mt-4">
+
+                    {% if app.session.get('user') is not empty %}
+                        {% if app.session.get('user').role == 2 %}
+                        <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cart_modal_{{ article.id }}">Ajout Panier</a>
+                        {% endif %}
+                    {% endif %}
+                    <a href="{{ path('article_details', {id: article.id}) }}" class="btn btn-secondary d-inline">Details</a>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
 {% endblock %}

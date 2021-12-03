@@ -1,0 +1,51 @@
+{% extends '@App/base.html.twig' %}
+{% block title %}{{ dynamic }}{% endblock %}
+
+{% block body %}
+
+    <h3>Votre profil</h3>
+
+    {% for message in app.flashes('info') %}
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+
+    <ul class="list-group">
+        <li class="list-group-item active" aria-current="true">Votre profil</li>
+        <li class="list-group-item">Nom/Prénom: <b>{{ user.firstName ~' '~ user.lastName|upper }}</b></li>
+        <li class="list-group-item">Email: <b>{{ user.email }}</b></li>
+        <li class="list-group-item">
+            {% if user.role == 1 %}
+            Role: <b>Administrateur</b>
+            {% elseif user.role == 2 %}
+            Role: <b>Client</b>
+            {% else %}
+            Role: <b>RH</b>
+            {% endif %}
+        </li>
+        <li class="list-group-item">
+            Avatar:
+            {% if user.photo is empty %}
+            <b>Vous n'avez pas uploadé de photo de profil</b>
+            {% else %}
+                <img width=50 height="50" class="rounded-circle" src="{{ asset('photo_user/' ~ user.photo ) }}" alt="{{ user.photo }}">
+            {% endif %}
+        </li>
+    </ul>
+
+    <div class="form-group mt-4">
+        {{ form_start(form) }}
+
+        {# FILE #}
+        {{ form_label(form.photo) }}
+        {{ form_widget(form.photo) }}
+
+        {# BUTTON #}
+        {{ form_row(form.submit, {'label':dynamic}) }}
+        {{ form_end(form, {'render_rest':false}) }}
+    </div>
+{% endblock %}
+
+

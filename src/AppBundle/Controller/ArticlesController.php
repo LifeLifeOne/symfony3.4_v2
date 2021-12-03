@@ -23,16 +23,23 @@ class ArticlesController extends Controller
         $article = new Articles();
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
+        $conn = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted()) {
 
-            // Connection
-            $conn = $this->getDoctrine()->getManager();
+            $file = $form->get('photo')->getData();
 
-            // Persist vers la table
+            $slug_name = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME); // Nom du fichier
+            $slug_extension = $file->guessExtension(); // Nom de l'extension
+
+            $file_name = sprintf(
+              "%s_%s.%s", $slug_name, uniqid(), $slug_extension
+            );
+
+            $article->setPhoto($file_name);
+            $file->move($this->getParameter('uploadsArticleDir'), $file_name);
+
             $conn->persist($article);
-
-            // Equivalent de execute() de PDO
             $conn->flush();
 
             $this->addFlash(

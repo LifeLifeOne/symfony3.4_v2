@@ -29,6 +29,13 @@ class Articles
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="photo", type="string", length=255)
+     */
+    private $photo;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="quantity", type="integer")
@@ -42,6 +49,12 @@ class Articles
      */
     private $description;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
 
     /**
      * Get id
@@ -124,5 +137,52 @@ class Articles
     {
         return $this->description;
     }
-}
 
+    /**
+     * Set photo
+     *
+     * @param string $photo
+     *
+     * @return Articles
+     */
+    public function setPhoto($photo)
+    {
+        $this->photo = $photo;
+
+        return $this;
+    }
+
+    /**
+     * Get photo
+     *
+     * @return string
+     */
+    public function getPhoto()
+    {
+        return $this->photo;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Articles
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+}
